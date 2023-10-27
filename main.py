@@ -6,12 +6,13 @@ import sqlite3
 app =Flask(__name__)
 CORS(app)
 
-
+#create table ////////////////////////
 # conn = sqlite3.connect('todolist.db')
 # cursor = conn.cursor()
 # cursor.execute('''CREATE TABLE IF NOT EXISTS todo (id INTEGER PRIMARY KEY, title TEXT)''')
 # conn.commit()
 # conn.close()
+
 
 @app.route('/todo', methods=['GET'])
 def get_todo():
@@ -27,35 +28,10 @@ def get_todo():
         }
         item_list.append(item_dict)
 
-    conn.close()
+        conn.close()
     
     return jsonify(item_list)
 
-
-
-# @app.route('/todo', methods=['GET'])
-
-# def get_todo():
-#     conn = sqlite3.connect('todolist.db')
-#     cursor = conn.cursor()
-#     cursor.execute('SELECT * FROM items')
-#     items = cursor.fetchall()
-#     item_list = []
-
-#     for item in items:
-#         item_dict = {
-#             'id': item[0],
-#             'name': item[1],
-#             'description': item[2]
-#         }
-#         item_list.append(item_dict)
-
-#     conn.close()
-#     return jsonify(item_list)
-    
-    # # print(items)
-    # conn.close()
-    # return jsonify(items)
 
 @app.route('/todo', methods=['POST'])
 def create_item():
